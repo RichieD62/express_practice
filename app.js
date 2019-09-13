@@ -18,7 +18,13 @@ app.get('/api/courses', function(req, res) {
 })
 
 app.get('/api/courses/:id', function(req, res) {
-    res.send(req.params)
+    var course = courses.find(c => c.id === parseInt(req.params.id))
+    if (!course) {
+        res.status(404).send("the course with the given idea was not found")
+        console.log("object not found")
+    } else {
+        res.send(course)
+    }
 })
 
 // Starts the server
